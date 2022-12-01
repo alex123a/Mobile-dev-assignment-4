@@ -55,7 +55,7 @@ class _TodoState extends State<TodoList> {
   }
 
   Widget _buildTodoItem(String title) {
-    return ListTile(title: Text(title));
+    return ListTile(title: Text(title, style: TextStyle(color: Colors.white)));
   }
 
   final ButtonStyle flatButtonStyleGreen = TextButton.styleFrom(
@@ -85,10 +85,13 @@ class _TodoState extends State<TodoList> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.grey[800],
-          title: const Text('Add a task'),
+          title: const Text('Add a task', style: TextStyle(color: Colors.white)),
           content: TextField(
             controller: textEditer,
-            decoration: const InputDecoration(hintText: 'Enter task here'),
+            decoration: const InputDecoration(
+              hintText: 'Enter task here'
+            ),
+            style: TextStyle(color: Colors.white)
           ),
           actions: <Widget>[
             // add button
