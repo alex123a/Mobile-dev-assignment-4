@@ -50,14 +50,24 @@ class _TodoState extends State<TodoList> {
     return ListTile(title: Text(title));
   }
 
-  final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+  final ButtonStyle flatButtonStyleGreen = TextButton.styleFrom(
     foregroundColor: Colors.white,
     minimumSize: Size(88, 44),
     padding: EdgeInsets.symmetric(horizontal: 16.0),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(2.0)),
     ),
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.green,
+  );
+
+  final ButtonStyle flatButtonStyleRed = TextButton.styleFrom(
+    foregroundColor: Colors.white,
+    minimumSize: Size(88, 44),
+    padding: EdgeInsets.symmetric(horizontal: 16.0),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(2.0)),
+    ),
+    backgroundColor: Colors.red,
   );
 
   Future<void> _displayDialog(BuildContext context) async {
@@ -74,7 +84,7 @@ class _TodoState extends State<TodoList> {
           actions: <Widget>[
             // add button
             TextButton(
-              style: flatButtonStyle,
+              style: flatButtonStyleGreen,
               child: const Text('Add'),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -83,7 +93,7 @@ class _TodoState extends State<TodoList> {
             ),
             // Cancel button
             TextButton(
-              style: flatButtonStyle,
+              style: flatButtonStyleRed,
               child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
