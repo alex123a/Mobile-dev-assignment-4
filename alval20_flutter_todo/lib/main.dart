@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "My To-do app",
+      title: "My App",
       home: TodoList()
     );
   }
@@ -29,13 +29,21 @@ class _TodoState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("To-do List")),
-      body: ListView(children: _getItems()),
+      appBar: AppBar(
+        title: Text("To-do List"),
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white
+      ),
+      body: ListView(
+        children: _getItems()
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _displayDialog(context),
         tooltip: "Add item",
-        child: Icon(Icons.add)
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
       ),
+      backgroundColor: Colors.grey[800],
     );
   }
 
@@ -76,6 +84,7 @@ class _TodoState extends State<TodoList> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.grey[800],
           title: const Text('Add a task'),
           content: TextField(
             controller: textEditer,
