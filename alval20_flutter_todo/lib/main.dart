@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "My App",
-      home: TodoList()
+      home: TodoList(),
+      theme: ThemeData(
+        brightness: Brightness.dark
+      )
     );
   }
 }
@@ -40,7 +43,10 @@ class _TodoState extends State<TodoList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _displayDialog(context),
         tooltip: "Add item",
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add, 
+          color: Colors.white
+        ),
         backgroundColor: Colors.green,
       ),
       backgroundColor: Colors.grey[800],
@@ -54,8 +60,28 @@ class _TodoState extends State<TodoList> {
     textEditer.clear();
   }
 
+  void _deleteItem(String title) {
+    setState(() {
+      todolist.remove(title);
+    });
+  }
+  
   Widget _buildTodoItem(String title) {
-    return ListTile(title: Text(title, style: TextStyle(color: Colors.white)));
+    return ListTile(
+      title: Text(
+        title, 
+        style: TextStyle(
+          color: Colors.white
+        )
+      ),
+      trailing: IconButton(
+        icon: Icon(
+          Icons.remove_circle, 
+          color: Colors.red[800]
+        ),
+        onPressed: (() => _deleteItem(title))
+      ),
+    );
   }
 
   final ButtonStyle flatButtonStyleGreen = TextButton.styleFrom(
@@ -89,7 +115,8 @@ class _TodoState extends State<TodoList> {
           content: TextField(
             controller: textEditer,
             decoration: const InputDecoration(
-              hintText: 'Enter task here'
+              hintText: 'Enter task here',
+              hintStyle: TextStyle(color: Colors.white)
             ),
             style: TextStyle(color: Colors.white)
           ),
