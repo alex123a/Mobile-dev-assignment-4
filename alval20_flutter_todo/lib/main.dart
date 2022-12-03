@@ -27,6 +27,7 @@ class TodoList extends StatefulWidget {
 
 class _TodoState extends State<TodoList> {
   final List<String> todolist = <String>[];
+  final List<String> completedlist = <String>[];
   final TextEditingController textEditer = TextEditingController();
 
   @override
@@ -37,8 +38,23 @@ class _TodoState extends State<TodoList> {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white
       ),
-      body: ListView(
-        children: _getItems()
+      body: Column(
+        children: [
+          Flexible(
+            child: Container(
+              child: ListView(
+                children: _getItems()
+              ),
+            ),
+          ),
+          Flexible(
+            child: Container(
+              child: ListView(
+                children: _getCompletedItems()
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _displayDialog(context),
@@ -65,6 +81,13 @@ class _TodoState extends State<TodoList> {
       todolist.remove(title);
     });
   }
+
+  void _completeItem(String title) {
+    setState(() {
+      completedlist.add(title);
+      todolist.remove(title);
+    });
+  }
   
   Widget _buildTodoItem(String title) {
     return ListTile(
@@ -81,6 +104,25 @@ class _TodoState extends State<TodoList> {
         ),
         onPressed: (() => _deleteItem(title))
       ),
+      leading: IconButton(
+        icon: Icon(
+          Icons.done,
+          color: Colors.green[700]
+        ),
+        onPressed: (() => _completeItem(title))
+      )
+    );
+  }
+
+  Widget _buildCompleteItem(String title) {
+    return ListTile(
+      title: Text(
+        title, 
+        style: TextStyle(
+          color: Colors.grey,
+          decoration: TextDecoration.lineThrough
+        )
+      )
     );
   }
 
@@ -148,6 +190,14 @@ class _TodoState extends State<TodoList> {
     final List<Widget> todoWidgets = <Widget>[];
     for (String title in todolist) {
       todoWidgets.add(_buildTodoItem(title));
+    }
+    return todoWidgets;
+  }
+
+  List<Widget> _getCompletedItems() {
+    final List<Widget> todoWidgets = <Widget>[];
+    for (String title in completedlist) {
+      todoWidgets.add(_buildCompleteItem(title));
     }
     return todoWidgets;
   }
