@@ -124,7 +124,7 @@ class _TodoState extends State<TodoList> {
       leading: IconButton(
         icon: Icon(
           Icons.done,
-          color: Colors.green[700]
+          color: Colors.green[600]
         ),
         onPressed: (() => _completeItem(title))
       )
