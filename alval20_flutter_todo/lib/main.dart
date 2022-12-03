@@ -40,12 +40,29 @@ class _TodoState extends State<TodoList> {
       ),
       body: Column(
         children: [
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            child: const Text("Tasks remaining",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontSize: 30,
+              )
+            )
+          ),
           Flexible(
             child: Container(
               child: ListView(
                 children: _getItems()
               ),
             ),
+          ),
+          Container(
+            child: const Text("Completed tasks",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontSize: 30
+              )
+            )
           ),
           Flexible(
             child: Container(
